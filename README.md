@@ -9,7 +9,7 @@ https://chatgpt.com/
 Reason for AI Usage:
 ====================
 
-ChatGPT's main role in the development of the project was to assist in matching WireFrames and fixing and Database Integration Issues.
+ChatGPT's main role in the development of the project was to assist in matching WireFrames and fixing any Database Integration Issues.
 
 ChatGPT Chats:
 ==============
