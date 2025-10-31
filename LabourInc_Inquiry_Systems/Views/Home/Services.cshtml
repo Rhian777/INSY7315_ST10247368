@@ -1,0 +1,248 @@
+﻿@{
+    ViewData["Title"] = "Services";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - LaborInc</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #fff;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+            header a {
+                text-decoration: none;
+                color: #333;
+                margin: 0 1rem;
+                font-weight: 500;
+            }
+
+            header .btn {
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                border: none;
+                cursor: pointer;
+            }
+
+        .btn-login {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .btn-home {
+            background-color: #ff6347;
+            color: #fff;
+        }
+
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+
+            main h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            main p.subtitle {
+                font-style: italic;
+                margin-bottom: 2rem;
+            }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cards-row, .related-services-row {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            border: 1px solid #ff6347;
+            border-radius: 4px;
+            width: 300px;
+            text-align: left;
+            overflow: hidden;
+        }
+
+            .card img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+                background-color: #ff6347;
+            }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+            .card-content small {
+                font-style: italic;
+                color: #666;
+            }
+
+            .card-content h3 {
+                margin: 0.5rem 0;
+            }
+
+            .card-content p {
+                font-size: 0.9rem;
+                color: #444;
+            }
+
+            .card-content a {
+                text-decoration: none;
+                font-weight: bold;
+                color: #ff6347;
+                display: inline-block;
+                margin-top: 0.5rem;
+            }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            border-top: 1px solid #eaeaea;
+            flex-wrap: wrap;
+        }
+
+            footer .footer-links a {
+                margin: 0 1rem;
+                color: #333;
+                text-decoration: none;
+            }
+
+            footer small {
+                color: #666;
+            }
+
+        .social-icons a {
+            margin: 0 0.5rem;
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <p class="subtitle">Labourinc – Your Trusted Partner in Workforce and Compliance Solutions</p>
+        <h1>Payroll & Statutory Registration</h1>
+        <p>Ensure your business remains fully compliant with South African labour and tax requirements. Labourinc handles payroll processing, UIF, PAYE, and statutory registrations, giving you peace of mind while reducing administrative burdens.</p>
+
+        <div class="tabs">
+            <div>Overview</div>
+            <div>Pricing</div>
+            <div>FAQ</div>
+            <div>Documents</div>
+        </div>
+
+        <div class="cards-row">
+            <div class="card">
+                <img src="~/images/Invoice.jpg" alt="Engagement">
+                <div class="card-content">
+                    <small>Engagement</small>
+                    <h3>Request a Quote</h3>
+                    <p>Get a customised quotation based on your workforce size and specific compliance needs. Our consultants will prepare a transparent cost estimate within 24–48 hours.</p>
+                    
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="~/images/Form.jpg" alt="Resources">
+                <div class="card-content">
+                    <small>Resources</small>
+                    <h3>Download Form</h3>
+                    <p>Instantly access statutory registration forms and payroll templates in PDF format. Forms are pre-formatted for easy completion and submission.</p>
+                    
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="~/images/Chatbot.png" alt="Support">
+                <div class="card-content">
+                    <small>Support</small>
+                    <h3>Chat with Us</h3>
+                    <p>Connect with our virtual assistant or a live consultant for immediate guidance. Ask questions, clarify processes, or get directed to the right form.</p>
+                    
+                </div>
+            </div>
+        </div>
+
+        <p><em>Not quite what you're looking for?</em></p>
+        <h2>Related Services</h2>
+        <p><em>LabourInc – Your Trusted Partner in Workforce and Compliance Solutions</em></p>
+
+        <div class="related-services-row">
+            <div class="card">
+                <div class="card-content">
+                    <h3>Employment Contracts & HR Policies</h3>
+                    <p>Draft and customise employment contracts and workplace policies that ...</p>
+                    
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h3>Workplace Disciplinary Management</h3>
+                    <p>Guidance and documentation for fair and compliant disciplinary procedures ...</p>
+                    
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h3>Dispute Resolution & CCMA Representation</h3>
+                    <p>Expert support and representation in workplace disputes, hearings, and ...</p>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer bg-light mt-5">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-md-3 placeholder-img" style="height: 50px;"></div>
+                <div class="col-md-9 mt-2">
+                    <a href="@Url.Action("Index", "Home")" ">Home</a>
+                    <a href="@Url.Action("Services", "Home")">Services</a>
+                    <a href="@Url.Action("Admin", "Login")" ">Admin Login</a>
+                    <a href="/Inquiry/Submit">Submit an Inquiry</a>
+                </div>
+            </div>
+            <div class="social-icons mb-2">
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+            </div>
+            <p>© 2024 LaborInc. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+

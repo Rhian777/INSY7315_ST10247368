@@ -1,0 +1,160 @@
+﻿@model IEnumerable<LabourInc_Inquiry_Systems.Models.Inquiry>
+
+<h2>Admin Dashboard</h2>
+<p>
+    <a href="/Admin/Logout" class="text-decoration-none">
+        <i class="bi bi-person-circle text-warning" style="font-size:1.5rem;"></i>
+    </a>
+</p>
+
+<div class="mb-3 d-flex gap-2">
+    <select id="statusFilter" class="form-select" style="width:150px;">
+        <option value="">All Statuses</option>
+        <option value="New">New</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option>
+    </select>
+
+    <select id="serviceFilter" class="form-select" style="width:200px;">
+        <option value="">All Services</option>
+        @foreach (var service in Model.Select(m => m.ServiceRequested).Distinct())
+        {
+            <option value="@service">@service</option>
+        }
+    </select>
+
+    <input type="date" id="dateFilter" class="form-control" style="width:150px;" />
+</div>
+
+<table class="table table-bordered" id="inquiryTable">
+    <thead class="table-light">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Service</th>
+            <th>Status</th>
+            <th>Attachment</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var inq in Model)
+        {
+            <tr class="data-row" data-status="@inq.Status" data-service="@inq.ServiceRequested" data-date="@inq.SubmittedAt.ToString("yyyy-MM-dd")">
+                <td>@inq.Id</td>
+                <td>@inq.Name</td>
+                <td>@inq.Email</td>
+                <td>@inq.ServiceRequested</td>
+                <td>
+                    <form asp-action="UpdateStatus" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@inq.Id" />
+                        @{
+                            var statuses = new[] { "New", "In Progress", "Resolved" };
+                        }
+                        <select name="status" class="form-select">
+                            @foreach (var status in statuses)
+                            {
+                                <option value="@status" selected="@(inq.Status == status)">@status</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-secondary mt-1">Save</button>
+                    </form>
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(inq.AttachmentFileName))
+                    {
+                        <a href="/Admin/Download/@inq.Id">Download</a>
+                    }
+                    else
+                    {
+                        <span>-</span>
+                    }
+                </td>
+                <td>@inq.SubmittedAt.ToShortDateString()</td>
+            </tr>
+
+            <tr class="details-row" style="display:none;">
+                <td colspan="7">
+                    <div class="card p-3 bg-light shadow-sm">
+                        <div class="row mb-2">
+                            <div class="col-md-3"><strong>ID:</strong> @inq.Id</div>
+                            <div class="col-md-3"><strong>Status:</strong> @inq.Status</div>
+                            <div class="col-md-3"><strong>Service:</strong> @inq.ServiceRequested</div>
+                            <div class="col-md-3"><strong>Date Submitted:</strong> @inq.SubmittedAt.ToString("f")</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6"><strong>Name:</strong> @inq.Name</div>
+                            <div class="col-md-6"><strong>Email:</strong> @inq.Email</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-12"><strong>Description:</strong> @inq.Details</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Attachment:</strong>
+                                @if (!string.IsNullOrEmpty(inq.AttachmentFileName))
+                                {
+                                    <a href="/Admin/Download/@inq.Id">Download</a>
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        const statusFilter = document.getElementById('statusFilter');
+        const serviceFilter = document.getElementById('serviceFilter');
+        const dateFilter = document.getElementById('dateFilter');
+        const rows = document.querySelectorAll('#inquiryTable .data-row');
+
+        function filterTable() {
+            const statusVal = statusFilter.value.toLowerCase();
+            const serviceVal = serviceFilter.value.toLowerCase();
+            const dateVal = dateFilter.value;
+
+            rows.forEach(row => {
+                const rowStatus = row.dataset.status.toLowerCase();
+                const rowService = row.dataset.service.toLowerCase();
+                const rowDate = row.dataset.date;
+
+                const match =
+                    (statusVal === '' || rowStatus === statusVal) &&
+                    (serviceVal === '' || rowService === serviceVal) &&
+                    (dateVal === '' || rowDate === dateVal);
+
+                row.style.display = match ? '' : 'none';
+                const detailRow = row.nextElementSibling;
+                if(detailRow && detailRow.classList.contains('details-row')){
+                    detailRow.style.display = 'none';
+                }
+            });
+        }
+
+        statusFilter.addEventListener('change', filterTable);
+        serviceFilter.addEventListener('change', filterTable);
+        dateFilter.addEventListener('change', filterTable);
+
+        rows.forEach(row => {
+            row.addEventListener('click', () => {
+                const detailRow = row.nextElementSibling;
+                if (detailRow.style.display === 'none') {
+                    detailRow.style.display = 'table-row';
+                    row.classList.add('table-warning'); // Bootstrap orange highlight
+                } else {
+                    detailRow.style.display = 'none';
+                    row.classList.remove('table-warning');
+                }
+            });
+        });
+    </script>
+}

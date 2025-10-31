@@ -1,0 +1,28 @@
+﻿@model LabourInc_Inquiry_Systems.Models.ViewModels.LoginViewModel
+
+<h2 class="text-center mb-4">Admin Login</h2>
+
+<div class="d-flex justify-content-center">
+    <form asp-action="Login" method="post" class="w-50">
+        <div class="mb-3 text-center">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control text-center" />
+        </div>
+        <div class="mb-3 text-center">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" type="password" class="form-control text-center" />
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-warning text-white w-50" style="background-color:#ff6347">Login</button>
+        </div>
+    </form>
+</div>
+
+<div class="mt-3 text-center">
+    @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+    {
+        <div class="text-danger">@err.ErrorMessage</div>
+    }
+</div>
+
+

@@ -1,0 +1,115 @@
+﻿@model LabourInc_Inquiry_Systems.Models.ViewModels.InquiryFormViewModel
+
+<h2 style="text-align:center;">Submit Inquiry</h2>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .inquiry-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+        .inquiry-form div {
+            width: 100%;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .inquiry-form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .inquiry-form input[type="text"],
+        .inquiry-form input[type="email"],
+        .inquiry-form input[type="file"],
+        .inquiry-form textarea,
+        .inquiry-form select {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ff6347;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .inquiry-form button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            .inquiry-form button:hover {
+                background-color: #ff6347;
+            }
+</style>
+
+<form asp-action="Submit" enctype="multipart/form-data" method="post" class="inquiry-form">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+    <div>
+        <label asp-for="Company"></label>
+        <input asp-for="Company" />
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+    <div>
+        <label asp-for="ServiceRequested"></label>
+        <select asp-for="ServiceRequested">
+            <option value="">-- Select a Service --</option>
+            <option value="Payroll and Statutory Registration">Payroll and Statutory Registration</option>
+            <option value="Employment Contracts and HR Policies">Employment Contracts and HR Policies</option>
+            <option value="Dispute Resolution and CCMA Representation">Dispute Resolution and CCMA Representation</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="Details"></label>
+        <textarea asp-for="Details" rows="4"></textarea>
+    </div>
+    <div>
+        <label asp-for="Attachment"></label>
+        <input asp-for="Attachment" type="file" />
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success mt-3" style="text-align:center;">@ViewBag.Message</div>
+}
+
+<footer class="footer bg-light mt-5">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-md-3 placeholder-img" style="height: 50px;"></div>
+            <div class="col-md-9 mt-2">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+                <a href="@Url.Action("Services", "Home")">Services</a>
+                <a href="@Url.Action("Admin", "Login")">Admin Login</a>
+                <a href="/Inquiry/Submit">Submit an Inquiry</a>
+            </div>
+        </div>
+        <div class="social-icons mb-2">
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-twitter"></i></a>
+        </div>
+        <p>© 2024 LaborInc. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+</footer>
+
